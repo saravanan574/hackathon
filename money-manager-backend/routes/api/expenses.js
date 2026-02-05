@@ -19,11 +19,11 @@ router.get('/', async (req, res) => {
 // @desc    Add new expense
 // @access  Public
 router.post('/', async (req, res) => {
-  const { category, amount, date } = req.body;
+  const { description, amount, date } = req.body;
 
   try {
     const newExpense = new Expense({
-      category,
+      description,
       amount,
       date
     });

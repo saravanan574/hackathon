@@ -1,20 +1,18 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
 const connectDB = require('./config/db');
 
 const app = express();
 
-// Connect Database
+// Connect to database
 connectDB();
 
-app.use(cors());
-app.use(express.json());
+// Init middleware
+app.use(express.json({ extended: false }));
 
-// Define Routes
-app.use('/api/incomes', require('./routes/api/incomes'));
-app.use('/api/expenses', require('./routes/api/expenses'));
+// Define routes
 app.use('/api/accounts', require('./routes/api/accounts'));
+app.use('/api/expenses', require('./routes/api/expenses'));
+app.use('/api/incomes', require('./routes/api/incomes'));
 
 const PORT = process.env.PORT || 5000;
 
