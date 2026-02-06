@@ -1,19 +1,13 @@
+const mongoose = require("mongoose");
 
-const mongoose = require('mongoose');
-
-const AccountSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true
+const AccountSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: true, unique: true },
+    balance: { type: Number, default: 0 },
   },
-  type: {
-    type: String,
-    required: true
-  },
-  balance: {
-    type: Number,
-    required: true
-  }
-});
+  { timestamps: true }
+);
 
-module.exports = mongoose.model('Account', AccountSchema);
+// Avoid "Cannot overwrite model" errors
+module.exports =
+  mongoose.models.Account || mongoose.model("Account", AccountSchema);
